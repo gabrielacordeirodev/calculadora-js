@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Nunito:wght@400;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #0f0f1a;
+  --card: #1a1a2e;
+  --card-border: #2a2a4a;
+  --display-bg: #0a0a15;
+  --purple: #7c3aed;
+  --purple-light: #a855f7;
+  --blue: #2563eb;
+  --blue-light: #60a5fa;
+  --btn-bg: #1e1e35;
+  --btn-hover: #2d2d50;
+  --btn-active: #3d3d65;
+  --text: #e2e8f0;
+  --text-dim: #94a3b8;
+  --red: #ef4444;
+  --orange: #f97316;
+  --green: #10b981;
+}
+
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(37, 99, 235, 0.08) 0%, transparent 60%);
+}
+
+.container {
+  padding: 20px;
+}
+
+.calculator {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 28px 24px 24px;
+  width: 340px;
+  box-shadow:
+    0 25px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 1px 0 rgba(255,255,255,0.08) inset;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+h1 {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.display {
+  width: 100%;
+  background: var(--display-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 2rem;
+  color: var(--text);
+  text-align: right;
+  outline: none;
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3) inset;
+}
+
+.display:focus {
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15), 0 2px 12px rgba(0,0,0,0.3) inset;
+}
+
+.buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.btn {
+  background: var(--btn-bg);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  color: var(--text);
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 18px 10px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  opacity: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.15), transparent 70%);
+  transition: opacity 0.2s;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.btn:hover::after { opacity: 1; }
+
+.btn:active {
+  background: var(--btn-active);
+  transform: translateY(1px) scale(0.97);
+  box-shadow: none;
+}
+
+/* Operadores */
+.btn-operator {
+  background: rgba(37, 99, 235, 0.15);
+  color: var(--blue-light);
+  border-color: rgba(37, 99, 235, 0.25);
+}
+.btn-operator:hover {
+  background: rgba(37, 99, 235, 0.28);
+}
+
+/* Limpar */
+.btn-clear {
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.25);
+}
+.btn-clear:hover {
+  background: rgba(239, 68, 68, 0.28);
+}
+
+/* Deletar */
+.btn-delete {
+  background: rgba(249, 115, 22, 0.15);
+  color: #fdba74;
+  border-color: rgba(249, 115, 22, 0.25);
+}
+.btn-delete:hover {
+  background: rgba(249, 115, 22, 0.28);
+}
+
+/* Zero (ocupa 2 colunas) */
+.btn-zero {
+  grid-column: span 2;
+}
+
+/* Igual */
+.btn-equals {
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: #fff;
+  border-color: transparent;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.35);
+}
+.btn-equals:hover {
+  background: linear-gradient(135deg, var(--purple-light), var(--blue-light));
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.5);
+}
+.btn-equals:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+}
+
+/* Responsivo */
+@media (max-width: 400px) {
+  .calculator {
+    width: 100%;
+    border-radius: 16px;
+    padding: 20px 16px 16px;
+  }
+  .display {
+    font-size: 1.6rem;
+  }
+  .btn {
+    padding: 15px 8px;
+    font-size: 1rem;
+  }
+}
